@@ -1,0 +1,28 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'manage/list.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+<div class="list_title">
+    <span style="width:25%">组织名</span>
+    <span style="width:25%">组织主页</span>
+    <span style="width:25%">组织Logo</span>
+    <span style="width:20%">操作</span>
+</div>
+<div class="message_container">
+{% for org in organizations %}
+    <li>
+        <a href="/manage/organization/{{ org.id }}">
+            <span style="width:25%">{{ org.name }}</span>
+            <span style="width:25%">{{ org.url | default:'暂无'}}</span>
+            <span style="width:25%">{{ org.logo | default:'暂无' }}</span>
+        </a>
+        <a href='/manage/organization/{{ org.id }}/edit' style="display: inline-block;width: 20%;text-align: center;">编辑</a>
+    </li>
+    <div class="line_list"></div>
+{% endfor %}
+</div>
+{% endblock %}

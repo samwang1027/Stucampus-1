@@ -1,0 +1,182 @@
+*{
+    margin:0px;
+    padding: 0px;
+}
+body{
+    background-color: #fdeff2;
+}
+.fixed{
+    width: 100px;
+    height: 120px;
+    position: fixed;
+    top: 200px;
+    right:80px; 
+}
+.fixed_link{
+    display: block;
+    width: 100px;
+    height: 50px;
+    background-color:#007bbb;
+    position: relative;
+    margin:10px 0px;
+    font-family: "Microsoft Yahei";
+    font-size: 24px;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    line-height: 50px;
+    vertical-align: middle;
+    border-width: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
+    z-index: 50;
+}
+.container{
+    width: 900px;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.header{
+    width: 100%;
+    height: 150px;
+    background: url(/static/images/lecture/blue.png) repeat-x bottom left;
+    position: relative;
+    font-family: "Microsoft Yahei";
+    font-size: 40px;
+    color: #007bbb;
+    text-align: center;
+    line-height: 420%; 
+}
+.message_container{
+    width: 840px;
+    position: relative;
+    margin: 35px 30px 10px 30px;
+    overflow: hidden;
+}
+.input_list{
+    width: 100%;
+    height: 35px;
+    position: relative;
+    overflow: hidden;
+    font-size: 0px;
+}
+.title{
+    width: 100px;
+    height: 100%;
+    position: relative;
+    float: left;
+    margin-right: 10px;
+    font-family: "Microsoft Yahei";
+    font-size: 18px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 35px;
+    vertical-align: middle;
+}
+.input_list input{
+    width: 600px;
+    height: 25px;
+    border: 0px;
+    position: relative;
+    margin: 5px 0 5px 0;
+    float: left;
+    font-family: "Microsoft Yahei";
+    font-size: 14px;
+    text-indent: 0.5em;
+}
+.url{
+    display: block;
+    width: 96px;
+    border: solid 2px #ffffff;
+    position: absolute;
+    top:15px;
+    right: 0px;
+    font-family: "Microsoft Yahei";
+    color:#ffffff;
+    font-size: 18px;
+    text-align: center;
+    line-height: 150%;
+    text-decoration: none;   
+}
+.choose_container{
+    width: 100px;
+    height: 75px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    overflow: hidden;
+}
+.choose{
+    height: 20px;
+    position: absolute;
+    right: 0px;
+    overflow: hidden;
+    font-family: "Microsoft Yahei";
+    font-size: 18px;
+    color: #ffffff;
+    line-height: 20px;
+    vertical-align: middle;
+}
+.check{
+    top: 0px;
+}
+.delete{
+    bottom: 15px;
+}
+.choose input{
+    margin-left: 5px;
+}
+.line{
+    width: 100%;
+    height: 25px;
+    background-image: url(/static/images/lecture/blue.png);
+    position: relative;
+    margin-top:50px;
+}
+.button{
+    margin-top:50px;
+    margin-bottom:80px;
+    text-align:center;
+}
+.button input{
+    display: inline-block;
+    width: 280px;
+    height: 50px;
+    background-color:#007bbb;
+    font-family: "Microsoft Yahei";
+    font-size: 24px;
+    color: #ffffff;
+    border-width: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
+}
+.hidden{
+    display: none;
+}
+.error{
+    width: 700px;
+    position: relative;
+    font-family: "Microsoft Yahei";
+    font-size: 15px;
+    color: #ec6d71;
+    line-height: 120%;
+    vertical-align:middle; 
+    text-indent: 120px;
+}
+.message{
+    width: 900px;
+    position: relative;
+    margin-top: 25px;
+    overflow: hidden;
+}
+.is_delete{
+    background: url(/static/images/lecture/red.png) #ee827c repeat-x;
+    background-size: 400px 25px;
+}
+.not_delete{
+    background: url(/static/images/lecture/green.png) #98d98e repeat-x;
+    background-size: 400px 25px;
+}

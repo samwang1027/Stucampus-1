@@ -1,0 +1,45 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'plugins/ckeditor/ckeditor.js' | as_js }}
+    {{ 'plugins/ckeditor/adapters/jquery.js' | as_js }}
+    {{ 'admin/infor-article.js' | as_js }}
+    {{ 'admin/infor-article.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+    <h2>{% if infor %}编辑{%else%}添加{%endif%}信息文章 &amp; {% if infor %}Edit{%else%}Add{%endif%} Infor Article</h2>
+    <form class="list" id="infor-form" method='{% if infor %}put{%else%}post{%endif%}' action='/manage/infor/{%if infor%}{{infor.id}}{%else%}post{%endif%}'>
+    {% csrf_token %}
+    <ul>
+        <li>
+            <label class="head-label">标题</label>
+            <input type="text" class="element" name="title" id="title" value="{{infor.title}}" />
+        </li>
+        <li>
+            <label class="head-label">发布组织</label>
+            <select class="element-box" name="organization" id="organization">
+            {% for org in orgs %}
+            <option value="{{org.id}}"{% if org == infor.organization %}selected{%endif%}>
+            {{ org.name }}
+            </option>
+            {% endfor %}
+            </select>
+        </li>
+        <li>
+            <label class="head-label">正文内容</label>
+            <textarea class="element" name="content" id="infor-content">{{infor.content}}</textarea>
+        </li>
+        <li class="buttons">
+        {% if infor %}
+            <input type="button" value="删除" class="button" onclick="confirm('确实要删除这篇信息吗？') ? $S.Infor.remove({{infor.id}}) : false" />
+            <input type="button" value="查看" class="button" onclick="document.location='/infor/{{infor.id}}';" />
+            <input type="submit" value="修改" class="button"/>
+        {% else %}
+            <input type="submit" class="button" value="发布" />
+        {% endif %}
+        </li>
+    </ul>
+    </form>
+{% endblock %}

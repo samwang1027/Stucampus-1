@@ -1,0 +1,66 @@
+div.master-framework {
+	
+}
+
+form.large-element {
+	color: #3e3e3e;
+}
+form.large-element label, 
+form.large-element input {
+	height: 30px;
+	line-height: 30px;
+	font-size: 28px;
+	font-family: "Microsoft Yahei";
+}
+
+form.large-element label.label {
+	display: inline-block;
+	text-align: right;
+	width: 200px;
+}
+form.large-element input.textbox {
+	width: 300px;
+	padding: 5px;
+	margin: 0 1em;
+	border: 1px solid #ccc;
+}
+
+
+form.large-element input.button {
+	display: inline-block;
+	height: 52px;
+	padding: 5px 28px;
+	border-width: 0;
+	border-radius: 2px;
+	background: #ff696a;
+	color: #fff;
+	cursor: pointer;
+}
+form.large-element input.button:hover {
+	background: #ff5552;
+}
+form.large-element input.button:active {
+	background: #bf4f4f;
+}
+form.large-element input.button:active {
+	background-image: none;
+}
+
+form.large-element span.comment {
+	display: inline-block;
+}
+
+form.large-element ul {
+	margin: 50px auto;
+	padding: 0;
+	width: 800px;
+}
+form.large-element ul li {
+	list-style: none;
+	margin: 20px 0;
+	padding: 0;
+}
+form.large-element ul li.buttons {
+	text-align: center;
+	margin-top: 50px;
+}

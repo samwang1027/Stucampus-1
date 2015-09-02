@@ -1,0 +1,7 @@
+            <div id="signer-box" class="signer-box">
+            {% if user.is_authenticated %}
+                <a href="/account/profile" class="login signer-more" id="signer-more" style="font-size: 16px; text-indent: 30px;">个人中心</a>
+            {% else %}
+                <a href="/account/signin" class="login">登录</a>
+            {% endif %}
+            </div>

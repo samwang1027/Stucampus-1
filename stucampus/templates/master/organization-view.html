@@ -1,0 +1,17 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'manage/view.css' | as_css }}
+{{ 'admin/organization.js' | as_js }}
+{% endblock %}
+
+{% block content %}
+<div class="message_view">
+    <li style="font-size:18px"><strong>{{ org.name }}</strong> 组织资料</li>
+    <div class="line_view"></div>
+    <li>联系电话：<code>{{ org.phone }}</code></li>
+    <li>官方网站：<code><a href='{{ org.url }}'>{{ org.url }}</a></code></li>
+    <li>Logo：<code><a href='{{ org.logo }}'>{{ org.logo }}</a></code></li>
+</div>
+{% endblock %}

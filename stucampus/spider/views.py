@@ -1,0 +1,33 @@
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.core.urlresolvers import reverse
+from django.views import generic
+from django.core.paginator import Paginator, InvalidPage
+
+from stucampus.spider.notification_spider import update_notification
+from stucampus.spider.notification_spider import Notification
+from stucampus.account.permission import check_perms
+
+
+def index(request):
+    messages = Notification.objects.order_by('published_date').reverse()
+    paginator = Paginator(messages, 30)
+    page_num = request.GET.get('page')
+    try:
+        current_page = paginator.page(page_num)
+    except InvalidPage:
+        current_page = paginator.page(1)
+    return render(request, 'spider/index.html', {'page': current_page})
+
+
+@check_perms('spider.spider_manager')
+def update(request):
+    num_of_update = update_notification(7)
+    return HttpResponse(str(num_of_update))
+
+
+# for debug
+@check_perms('spider.spider_manager')
+def delete(request):
+    Notification.objects.all().delete()
+    return HttpResponseRedirect(reverse('spider:index'))

@@ -1,0 +1,232 @@
+@CHARSET "UTF-8";
+
+.main {
+	width: 860px;
+	margin: 28px auto;
+    position: relative;
+    overflow: hidden;
+    clear: both;
+}
+
+.main li {
+	list-style: none;
+}
+
+.left-side {
+	position: relative;
+	overflow: hidden;
+	float: left;
+	width: 205px;
+	border: 0.5px solid #e4e8e7;
+	background-color: #ffffff;
+}
+
+.left-side li {
+	position: relative;
+	overflow: hidden;
+	width: 205px;
+    padding-left: 20px;
+}
+
+.left-side a {
+	text-decoration: none;
+}
+
+.left-side a:link {
+	color: #000000;
+}
+
+.left-side a:visited {
+	color: #000000;
+}
+
+.left-side li:hover {
+	background-color: #efefef;
+}
+
+.list {
+    margin-top: 20px;
+	width: 164px;
+	height: 200px;
+}
+
+.list span {
+	position: relative;
+	top: -7px;
+	left: 40px;
+}
+
+img#avater {
+	position: relative;
+	left: 20px;
+	top: 20px;
+	margin: 0px auto 18px;
+}
+
+.right-side {
+	position: relative;
+	overflow: hidden;
+	float: right;
+	width: 630px;
+	height: auto !important;
+	padding: 5px 0 20px;
+	background-color: #ffffff;
+	border: 0.5px solid #e4e8e7;
+}
+
+.right-side h4 {
+	padding-bottom: 10px;
+	margin: 20px 0px 0px 0px;  
+	border-bottom: 2px solid #e4e8e7;
+}
+
+.infor {
+	width: 560px;
+	margin: 0px auto;
+}
+
+.infor ul {
+	width: 530px;
+	padding: 0px;
+	margin: 0px auto;
+	font-size: 16px;
+}
+
+.infor li {
+	height: 40px;
+	width: 520px;
+	line-height: 40px;
+	border-bottom: 1px solid #eee;
+}
+
+.change {
+	position: relative;
+	overflow: hidden;
+	width: 560px;
+	margin: 0px auto;
+}
+
+.element {
+	height: 25px;
+	width: 180px;
+	font-size: 16px;
+}
+
+.change ul {
+	position: relative;
+	overflow: hidden;
+	width: 530px;
+	padding: 0px;
+	margin: 0px auto;
+	font-size: 16px;
+}
+
+.change li {
+	position: relative;
+	overflow: hidden;
+	height: 40px;
+	margin-top: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.select_type {
+	height: 30px;
+	width: 186px;
+	font-size: 16px;
+}
+
+li#last {
+	position: relative;
+	overflow: hidden;
+	border: none;
+	padding: 8px;
+	text-align: center;
+}
+
+#captcha {
+    display: block;
+    float: left;
+    height: 40px;
+    width: 105px;
+    line-height: 40px;
+}
+
+.captcha {
+    display: block;
+    float: left;
+}
+
+input#confirm_botton {
+    position: relative;
+    overflow: hidden;
+    background: #acd340;
+    color: #fff;
+    border-radius: 2px;
+    border-width: 0;
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 20px;
+    height: 40px;   
+    font-family: "Microsoft Yahei";
+    font-size: 25px;
+}
+
+input#confirm_botton:hover {
+    background: #9bc513;
+}
+
+input#confirm_botton:active {
+    background: #819e30;
+}
+
+/*组织发布信息*/
+
+.post {
+    width: 560px;
+    margin:  0px auto;
+}
+
+.post ul {
+	width: 530px;
+	padding: 0px;
+	margin: 0px auto;
+	font-size: 16px;
+}
+
+.post li {
+	height: 40px;
+    line-height: 40px;
+	margin-top: 10px;
+}
+
+.post select {
+    height: 30px;
+	width: 186px;
+	font-size: 16px;
+}
+
+.post textarea {
+    width: 500px;
+    height: 300px;
+}
+
+.post span {
+    left: 0px;
+    position: relative;
+    top: 0px;
+}
+
+.buttons {
+    text-align: right;
+	margin-top: 30px;
+    position: relative;
+    top: 495px;
+    width: 543px;
+}
+
+.button {
+	padding: 4px 20px;
+	font-size: 15px;
+	font-family: "Microsoft Yahei";
+}
+

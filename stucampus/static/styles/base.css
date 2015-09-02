@@ -1,0 +1,115 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+body{
+	background-color: #eaf4fc;
+}
+
+.header{
+	width: 100%;
+	height: 236px;
+	background: url(/static/images/new_index/header.png) repeat-x;
+	position: relative;
+	overflow: hidden;
+}
+
+.header-container{
+	width: 950px;
+	height: 100%;
+	position: relative;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+/**
+ * Logo
+ */
+ .logo{
+	width: 225px;
+	height: 146px;
+	background: url(/static/images/new_index/logo.png) no-repeat;
+	position: absolute;
+	top: 42px;
+	left: 0px;
+}
+
+/**
+ * login
+ */
+.login{
+	width: 118px;
+	height: 39px;
+	background: url(/static/images/new_index/login.png) no-repeat;
+	position: absolute;
+	bottom: 24px;
+	right: 0px;
+	font-family: "Microsoft Yahei";
+	font-size: 18px;
+	color: #0388c9;
+	font-weight: bold;
+	text-decoration: none;
+	text-indent: 48px;
+	line-height: 39px;
+	vertical-align: middle;
+}
+
+/**
+ * 导航
+ */
+.nav{
+	height: 24px;
+	position: absolute;
+	top: 115px;
+	right: 40px;
+	overflow: hidden;
+	font-size: 0px;
+}
+
+.nav a{
+	font-family: "Microsoft Yahei";
+	font-size: 20px;
+	color: #000000;
+	text-decoration: none;
+	line-height: 24px;
+	vertical-align: middle;
+	margin-left: 10px;
+	font-weight: bold;
+}
+
+.nav a:hover{
+	color: #8bc4dc;
+}
+
+.nav a.selected {
+	color: #8bc4dc;
+}
+
+.nav li{
+	float: left;
+}
+
+/**
+ * 页脚
+ */
+.footer{
+	height: 100px;
+	position: relative;
+	margin: 0 5px;
+	padding-top: 30px;
+	border-top:1px #cccccc dashed; 
+	overflow: hidden;
+	font-family: "Microsoft Yahei";
+	font-size: 14px;
+	line-height: 180%;
+	text-align: center;
+}
+
+.footer a{
+	color: #000;
+}
+
+.footer a:hover{
+	text-decoration: none;
+}

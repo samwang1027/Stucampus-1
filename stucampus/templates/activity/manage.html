@@ -1,0 +1,92 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'manage/act_lec.css'|as_css }}
+{% endblock %}
+
+{% block content %}
+<form method="POST" action="{% url 'activity:manage' %}?page={{ page.number }}">
+{% csrf_token %}
+{% with formset=page.formset %}
+    {{ formset.management_form }}
+    
+    {% for form in formset %}
+        <div class="act_lec_add">
+            <div class="line"></div>
+            <li>
+                <label>标题</label>
+                {{ form.title }}
+                <span class="error">
+                    {% for error in form.title.errors %}
+                        {{ error }}&nbsp;
+                    {% endfor %}
+                </span>  
+            </li>
+            <div class="line"></div>
+            <li>
+                <label>地点</label>
+                {{ form.place }}
+                <span class="error">
+                    {% for error in form.place.errors %}
+                        {{ error }}&nbsp;
+                    {% endfor %}
+                </span>  
+            </li>
+            <div class="line"></div>
+            <li>
+                <label>日期</label>
+                {{ form.date }}
+                <span class="error">
+                    {% for error in form.date.errors %}
+                        {{ error }}&nbsp;
+                    {% endfor %}
+                </span>  
+            </li>
+            <div class="line"></div>
+            <li>
+                <label>时间</label>
+                {{ form.time }}
+                <span class="error">
+                    {% for error in form.time.errors %}
+                        {{ error }}&nbsp;
+                    {% endfor %}
+                </span>  
+            </li>
+            <div class="line"></div>
+            <li>
+                <label>具体时间</label>
+                {{ form.specific_time }}
+                <span class="error">
+                    {% for error in form.specific_time.errors %}
+                        {{ error }}&nbsp;
+                    {% endfor %}
+                </span>  
+            </li>
+            <div class="line"></div>
+            <li>
+                <label>概括</label>
+                {{ form.summary }}
+                <span class="error">
+                    {% for error in form.summary.errors %}
+                        {{ error }}&nbsp;
+                    {% endfor %}
+                </span>  
+            </li>
+            <div class="line"></div>
+            <li>
+                <label>已核</label>
+                {{ form.checked }}
+                <label>删除</label>
+                {{ form.DELETE }}
+            </li>
+        </div>
+        {{ form.id }}
+    {% endfor %}
+{% endwith %}
+    <input type="submit" value="提交" class="add" style="margin-bottom:75px;" />
+</form>
+
+{% include 'plugin/paginator.html' with page=page %}
+
+{% endblock %}
