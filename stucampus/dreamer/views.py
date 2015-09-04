@@ -39,14 +39,14 @@ class SignUp(View):
                 print "1"
                 return render(request, 'dreamer/failed.html')
             else:
-                if Register.objects.filter(sign_up_date=now).filter(ip=msg.ip).count()>5:  
+                if Register.objects.filter(sign_up_date=now).filter(ip=msg.ip).count()>=5:  
                     return HttpResponse("您当前IP已于同一天成功报名五次，请等候第二天或换另一台电脑再进行报名.")
                 else:
                     msg.save()
                     reply = msg
                     if(reply.gender=='male'):
                         reply.gender = '男';
-                    else:
+                    elif(reply.gender=='female'):
                         reply.gender = '女';
                     if(reply.dept1=='jsb'):
                         reply.dept1 = '技术部';
@@ -99,33 +99,33 @@ def check(request):
     aaa = Register.objects.all().count()
     return HttpResponse(aaa)
 
-
+@check_perms('dreamer.manager')
 def alldetail(request):
     aall = Register.objects.filter(status=True)
     user = request.user
 
-    cbb1 = aall.filter(first_dept="cbb")
-    cbb2 = aall.filter(second_dept="cbb")
+    cbb1 = aall.filter(dept1="cbb")
+    cbb2 = aall.filter(dept2="cbb")
     cbbb = cbb1.filter(gender="boy").count()+cbb2.filter(gender="boy").count()
     cbbg = cbb1.filter(gender="girl").count()+cbb2.filter(gender="girl").count()
 
-    jsb1 = aall.filter(first_dept="jsb")
-    jsb2 = aall.filter(second_dept="jsb")
+    jsb1 = aall.filter(dept1="jsb")
+    jsb2 = aall.filter(dept2="jsb")
     jsbb = jsb1.filter(gender="boy").count()+jsb2.filter(gender="boy").count()
     jsbg = jsb1.filter(gender="girl").count()+jsb2.filter(gender="girl").count()
 
-    sjb1 = aall.filter(first_dept="sjb")
-    sjb2 = aall.filter(second_dept="sjb")
+    sjb1 = aall.filter(dept1="sjb")
+    sjb2 = aall.filter(dept2="sjb")
     sjbb = sjb1.filter(gender="boy").count()+sjb2.filter(gender="boy").count()
     sjbg = sjb2.filter(gender="girl").count()+sjb1.filter(gender="girl").count()
 
-    xzb1 = aall.filter(first_dept="xzb")
-    xzb2 = aall.filter(second_dept="xzb")
+    xzb1 = aall.filter(dept1="xzb")
+    xzb2 = aall.filter(dept2="xzb")
     xzbb = xzb1.filter(gender="boy").count()+xzb2.filter(gender="boy").count()
     xzbg = xzb1.filter(gender="girl").count()+xzb2.filter(gender="girl").count()
 
-    yyb1 = aall.filter(first_dept="yyb")
-    yyb2 = aall.filter(second_dept="yyb")
+    yyb1 = aall.filter(dept1="yyb")
+    yyb2 = aall.filter(dept2="yyb")
     yybb = yyb1.filter(gender="boy").count()+yyb2.filter(gender="boy").count()
     yybg = yyb1.filter(gender="girl").count()+yyb2.filter(gender="girl").count()
 
@@ -136,9 +136,9 @@ def alldetail(request):
                                                     "cbb1":cbb1.count(),"cbb2":cbb2.count(),"cbbb":cbbb,"cbbg":cbbg,
                                                     "all" :aall.count(),"user":user})
 
-@check_perms('dreamer.apply_manage')
+@check_perms('dreamer.manager')
 def alllist(request):
-    applyall = Register.objects.filter(status=True).order_by('apply_date')
+    applyall = Register.objects.filter(status=True).order_by('sign_up_date')
     paginator = Paginator(applyall,8)
     page = request.GET.get('page')
     try:
@@ -147,15 +147,15 @@ def alllist(request):
         page = paginator.page(1)
     return render(request,'dreamer/list.html',{'page':page})
 
-@check_perms('dreamer.apply_manage')
+@check_perms('dreamer.manager')
 def delete(request):
     apply_id = request.GET.get('id')
     app = get_object_or_404(Register,id=apply_id)
     app.status = False
     app.save()
-    return HttpResponseRedirect('/dreamer/management')
+    return HttpResponseRedirect('/dreamer/manage/')
 
-@check_perms('dreamer.apply_manage')
+@check_perms('dreamer.manager')
 def search(request):
     search=request.POST.get('search')
     app = Register.objects.filter(status=True).filter(Q(name=search)|Q(stuID=search))
@@ -167,7 +167,7 @@ def search(request):
         page = paginator.page(1)
     return render(request,'dreamer/list.html',{'page':page})
 
-@check_perms('dreamer.apply_manage')
+@check_perms('dreamer.manager')
 def detail(request):
     apply_id = request.GET.get('id')
     app = get_object_or_404(Register,id=apply_id)
