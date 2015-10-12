@@ -32,7 +32,7 @@ urlpatterns = patterns(
                                namespace='minivideo')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^spider/', include('stucampus.spider.urls', namespace='spider')),
-    url(r'^dreamer/', include('stucampus.dreamer.urls', namespace='dreamer')),
+    #url(r'^dreamer/', include('stucampus.dreamer.urls', namespace='dreamer')),
 	url(r'^freetimecount/', include('stucampus.FreeTimeCount.urls')),
 )
 
