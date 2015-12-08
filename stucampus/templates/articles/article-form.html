@@ -94,7 +94,7 @@
     </div>
     <div class="line_aside"></div>
     <div class="content">
-        <p class="content_title">内容</p>
+        <h3>内容</h3>
         {{ form.content }}
         <p class="error" style="margin:10px 0px">
             {% for error in form.content.errors %}
@@ -102,7 +102,9 @@
             {% endfor %}
         </p>
     </div>
-    <div class="line_aside"></div>   
-    <input type="submit" value="提交" class="add">    
+    <div class="add">
+        <input type="submit" value="提交" class="btn btn-info">
+    </div>   
+        
 </form>  
 {% endblock %}

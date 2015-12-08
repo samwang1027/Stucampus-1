@@ -2,15 +2,38 @@
 {% load html_tools %}
 {{ 'plugin/paginator.css' | as_css }}
 {% endblock %}
-<div class="page">
-        <a href="?page=1">首页</a>
-    {% if page.has_previous %}
-        <a href="?page={{ page.previous_page_number }}">上一页</a>
-    {% endif %}
-        <span class="present">{{ page.number }}</span>
-    {% if page.has_next %}
-        <a href="?page={{ page.next_page_number }}">下一页</a>
-    {% endif %}
-        <a href="?page={{ page.paginator.num_pages }}">尾页</a>
-</div>
-    
+<nav>
+	<ul class="pagination">
+	{% if page.has_previous %}
+		<li>
+
+			<a href="?page={{ page.previous_page_number }}" aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span>
+			</a>
+		</li>
+	{% endif %}
+		<li><span class="page_num">{{ page.number }}/{{ page.paginator.num_pages }}</span></li>
+	{% if page.has_next %}
+		<li>
+			<a href="?page={{ page.next_page_number }}" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+			</a>
+		</li>
+	{% endif %}
+		<input type="number" class="page_num_input">
+		<button class="btn btn-default" type="button">跳转</button>
+	</ul>
+
+</nav>
+<!-- <div class="page">
+	<a href="?page=1">首页</a>
+	{% if page.has_previous %}
+	<a href="?page={{ page.previous_page_number }}">上一页</a>
+	{% endif %}
+	<span class="present">{{ page.number }}</span>
+	{% if page.has_next %}
+	<a href="?page={{ page.next_page_number }}">下一页</a>
+	{% endif %}
+	<a href="?page={{ page.paginator.num_pages }}">尾页</a>
+</div> -->
+

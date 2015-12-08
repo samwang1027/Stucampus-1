@@ -94,3 +94,9 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endCo
 .btn:focus {
 	outline:1px dotted #666;
 }
+
+/*表格*/
+.table_head tr th,.table_head tr td
+{
+	text-align: center;
+}
