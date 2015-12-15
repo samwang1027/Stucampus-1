@@ -6,7 +6,7 @@
 
 {% block htmlhead %}
     {% load html_tools %}
-    {{ 'categories.css' | as_css }}
+
 {% endblock %}
 
 {% block content %}
@@ -28,7 +28,7 @@
 		</div><!--end of categories_list-->
 
 		<div class="pagingbar">
-        	<a href="?category={{ category }}&page=1">首页</a>
+        	<a href="?category={{ category }}&page=1">首页11111</a>
    			{% if page.has_previous %}
         		<a href="?category={{ category }}&page={{ page.previous_page_number }}" class="previous">上一页</a>
     		{% endif %}
