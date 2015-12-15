@@ -77,10 +77,11 @@
                     <a href="/manage/infor/list">信息管理</a>
                 {% endif %}
                 {% if perms.infor.infor_create and user|is_org_manage %}
-                    <a href="/manage/infor/post">发布信息</a>
+                   <a href="/manage/infor/post">发布信息</a>
                 {% endif %}
                 {% if perms.infor.posted_infor_view %}
-                    <a href="#">已发信息</a>{% endif %}
+                    <a href="#">已发信息</a>
+                {% endif %}
                 {% if perms.magazine.magazine_view %}
                     <a href="/magazine">社团杂志</a>
                 {% endif %}
@@ -95,7 +96,7 @@
             </div>
         </div>
         <div id="footer">
-            <p>Power By 深圳大学学子天地 技术开发部 Copyright &copy; 2010-2013 深圳大学学子天地 站务委员会</p>
+            <p>Power By 深圳大学学子天地 技术开发部 Copyright &copy; 2010-2016 深圳大学学子天地 站务委员会</p>
         </div>
     </div>
 

@@ -33,7 +33,11 @@ body{
     color: #ffffff;
     line-height: 80px;
     vertical-align: middle;
+<<<<<<< HEAD
     margin-left: 150px;
+=======
+    margin-left:150px;
+>>>>>>> d9c81124b504c6bb2483673a9fce3fe7221b30f5
 }
 .nav a{
     color: #ffffff;
