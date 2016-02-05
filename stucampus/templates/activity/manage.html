@@ -84,9 +84,12 @@
         {{ form.id }}
     {% endfor %}
 {% endwith %}
-    <input type="submit" value="提交" class="add" style="margin-bottom:75px;" />
+<div class="add_input_box">
+    <input class="btn btn-default" type="submit" value="提交"/>
+</div>
+    
 </form>
 
-{% include 'plugin/paginator.html' with page=page %}
+
 
 {% endblock %}

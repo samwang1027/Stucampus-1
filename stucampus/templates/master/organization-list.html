@@ -7,17 +7,47 @@
 {% endblock %}
 
 {% block content %}
-<p class="infor">此处由学子管理员对其他组织进行管理，操作包括添加组织、添加及删除组织管理员，目前共有<strong>注册组织 &nbsp;{{ orgs.all.count }} &nbsp;个</strong>，<strong>正常状态下组织 &nbsp;{{ normal_orgs.all.count }} &nbsp;个</strong>，<strong>被禁组织 &nbsp;{{ baned_orgs.all.count }} &nbsp;个</strong>，<strong>已删除组织 &nbsp;{{ deleted_orgs.all.count }} &nbsp;个</strong></p>
-<div class="message_container">
-    <h2>快速添加组织</h2>
-    <div class="fast_add">
-        <label>组织名称</label>
-        <input type="text" name="name" id="name"/>
-        <label>联系电话</label>
-        <input type="text" name="phone" id="phone"/>
-        <input type="button" value="添加组织" onclick="$S.Organization.create()" class="btn btn-info" />
-    </div>
+
+
+
+
+
+<!-- 添加组织模态框（Modal） -->
+<div class="modal fade" id="create_organization" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               快速添加组织
+            </h4>
+         </div>
+         <div class="modal-body">
+            <p><label>组织名称<input type="text" name="name" id="name"/></label></p>
+            <p><label>联系电话 <input type="text" name="phone" id="phone"/></label></p>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">关闭
+            </button>
+            <button type="button" class="btn btn-primary" onclick="$S.Organization.create()">
+               提交
+            </button>
+         </div>
+      </div>
 </div>
+</div>
+
+
+<p class="infor">此处由学子管理员对其他组织进行管理，操作包括添加组织、添加及删除组织管理员，目前共有<strong>注册组织 &nbsp;{{ orgs.all.count }} &nbsp;个</strong>，<strong>正常状态下组织 &nbsp;{{ normal_orgs.all.count }} &nbsp;个</strong>，<strong>被禁组织 &nbsp;{{ baned_orgs.all.count }} &nbsp;个</strong>，<strong>已删除组织 &nbsp;{{ deleted_orgs.all.count }} &nbsp;个</strong></p>
+
+        <!-- 按钮触发添加组织模态框 -->
+<div class="message_manage">   <button class="btn btn-info" data-toggle="modal" data-target="#create_organization">添加组织</button></div> 
+
 <div class="aside"></div>
 <div class="message_container">
     <h2>常态组织</h2>
@@ -31,8 +61,8 @@
     {% else %}
     <li>
         <a href="/manage/organization/{{ org.id }}" style="width:57%">{{ org.name }}</a>
-        <input type="button" class="form_button"  value="删除该组织" onclick="confirm('确实要删除该组织吗？')?$S.Organization.remove({{org.id}}):false"  />
-        <input type="button" class="form_button" value="添加管理员" onclick="$S.Organization.addManager({{org.id}})" />
+        <input type="button" class="btn btn-info"  value="删除该组织" onclick="confirm('确实要删除该组织吗？')?$S.Organization.remove({{org.id}}):false"  />
+        <input type="button" class="btn btn-info" value="添加管理员" onclick="$S.Organization.addManager({{org.id}})" />
         <input type="text"  placeholder='请输入用户邮箱' id="org-{{org.id}}" />
     </li>
     {% endif %}
@@ -67,4 +97,5 @@
         <li>暂无被删除的组织</li>
     {% endif %}
 </div>
+
 {% endblock %}

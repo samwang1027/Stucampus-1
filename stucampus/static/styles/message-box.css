@@ -5,7 +5,7 @@
 	position: fixed;
 	top: 0;
 	left: 50%;
-	z-index: 1000;
+	z-index: 1051;/*bootstrap模态框是1050*/
 	margin-left:-40%;
 	width: 80%;
 	padding:5px;
@@ -16,7 +16,7 @@
 }
 #message-box .message-content {
 	width: 80%;
-	height: 40px;
+	min-height: 40px;
 	line-height: 40px;
 	font-size: 16px;
 	border-bottom-width: 1px;

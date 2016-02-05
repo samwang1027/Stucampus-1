@@ -3,7 +3,7 @@
 {
     margin: 0 auto;
 }
-.pagination .page_num
+.pagination #page_num,.pagination #page_all_num,.pagination .numspan
 {
     font-size: 16px;
     border: none;
@@ -12,7 +12,7 @@
     margin-left: 3px;
     margin-right: 3px;
 }
-.pagination .page_num:hover
+.pagination .page_num:hover,.pagination .numspan:hover
 {
     background: #fff;
     color: #05080B;

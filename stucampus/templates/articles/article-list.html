@@ -27,19 +27,7 @@
 			{% endfor %}
 		</div><!--end of categories_list-->
 
-		<div class="pagingbar">
-        	<a href="?category={{ category }}&page=1">首页11111</a>
-   			{% if page.has_previous %}
-        		<a href="?category={{ category }}&page={{ page.previous_page_number }}" class="previous">上一页</a>
-    		{% endif %}
-
-    		<span>第 {{ page.number }} 页，共 {{ page.paginator.num_pages }} 页</span>
-    
-    		{% if page.has_next %}
-        		<a class="next" href="?category={{ category }}&page={{ page.next_page_number }}">下一页</a>
-    		{% endif %}
-        	<a href="?category={{ category }}&page={{ page.paginator.num_pages }}">尾页</a>
-		</div>
+		{% include 'plugin/paginator.html' with page=page %}
 
 	</div><!--end of content-->
 

@@ -1,5 +1,5 @@
 Django==1.5.1
-DjangoUeditor==1.4.125
+DjangoUeditor==1.5.143
 PyYAML==3.10
 html2text==3.200.3
 lxml==3.3.4
