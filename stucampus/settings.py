@@ -17,6 +17,7 @@ UEDITOR_SETTINGS = {
         },
     }
 
+THUMBNAIL_DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 TIME_ZONE = 'Asia/Shanghai'
@@ -78,6 +79,8 @@ INSTALLED_APPS = (
 
     'raven.contrib.django.raven_compat',
     'DjangoUeditor',
+    'sorl.thumbnail',
+
     'stucampus.master',
     'stucampus.account',
     'stucampus.infor',

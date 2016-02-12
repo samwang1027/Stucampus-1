@@ -9,6 +9,9 @@
     {{ 'categories.css' | as_css }}
 {% endblock %}
 
+{% load thumbnail %}
+
+
 {% block content %}
 
 <div class="central">
@@ -19,7 +22,7 @@
 			{% for article in page %}
 			<a href="{% url 'articles:display' article.pk %}">
 				<div class="categories_list_entry">
-					<div class="entry_pic"><img src="{{ article.cover }}" width=135 height=90 ></div>
+					<div class="entry_pic">{% thumbnail article.cover "135x90" padding=True as im %}<img src="{{ im.url }}" width=135 height=90 >{% endthumbnail %}</div>
 					<h3>{{ article.title }}<span>{{ article.create_date | date:"Y年n月d日"}}</span></h3>
 					<p>{{ article.summary }}</p>
 				</div>

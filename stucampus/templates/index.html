@@ -16,6 +16,7 @@
 {% endblock %}
 
 {% load py_utils %}
+{% load thumbnail %}
 
 {% block content %}
 <div class="central">
@@ -46,7 +47,9 @@
                         <a href="{% url 'articles:display' article.pk %}">
                             {{ article.title | truncatechars:20 }}
                             <p>
-                                <img src="{{ article.cover }}" width="120" height="80" />
+                                {% thumbnail article.cover "120x80" padding=True as im %}
+                                    <img src="{{ im.url }}" width="120" height="80">
+                                {% endthumbnail %}
                                 {{ article.summary | truncatechars:45 }}
                             </p>
                         </a>
