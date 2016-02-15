@@ -10,5 +10,11 @@
     <li style="font-size:18px"><strong>后台管理</strong></li>
     <div class="line_view"></div>
     <li>{{ user.student.screen_name }} 你好。</li>
+    <form method="post" action="{% url 'master:sms' %}">
+        {% csrf_token %}
+        Number:<input type="number" name="phone" />
+        Name:<input type="tex" name="name" />
+        <input type="submit" value="Send" />
+    </form>
 </div>
 {% endblock %}

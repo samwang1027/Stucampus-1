@@ -68,6 +68,11 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+# SMS_ZHIYAN_APIKEY =
+# SMS_ZHIYAN_APPID =
+# SMS_ZHIYAN_TPLID =
+SMS_ZHIYAN_SENDURL = 'https://sms.zhiyan.net/sms/template_send.json'
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',

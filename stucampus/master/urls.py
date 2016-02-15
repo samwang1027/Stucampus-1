@@ -39,4 +39,7 @@ urlpatterns = patterns(
     url(r'^organization/(?P<id>\d+)/edit$', EditOrganization.as_view(),
         name='organization_edit'),
 
+    url(r'^sms/send$',
+        'stucampus.master.views.manage.index.send_sms', name='sms')
+
 )
