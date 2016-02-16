@@ -15,6 +15,8 @@ from stucampus.account.permission import check_perms
 from django.conf import settings
 from stucampus.utils import spec_json
 
+from  stucampus.master.views.manage.lunarSolarConverter import LunarSolarConverter, Lunar, Solar
+
 @login_required
 def redirect(request):
     return HttpResponseRedirect('/manage/index')
@@ -57,3 +59,14 @@ def send_bday_msg( mobile, name ):
     # 处理响应内容
     response = json.loads( response )
     return response
+
+@login_required
+def convert( request ):
+    year = int( request.POST.get('year') )
+    month = int( request.POST.get('month') )
+    day = int( request.POST.get('day') )
+    leap = request.POST.get('leap', False)
+    converter = LunarSolarConverter()
+    lunar = Lunar( year, month, day, leap )
+    solar = converter.LunarToSolar( lunar )
+    return spec_json( messages=(lunar.lunarYear,lunar.lunarMonth, lunar.lunarDay), status=(solar.solarYear, solar.solarMonth, solar.solarDay) )

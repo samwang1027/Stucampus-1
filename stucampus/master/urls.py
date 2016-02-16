@@ -40,6 +40,9 @@ urlpatterns = patterns(
         name='organization_edit'),
 
     url(r'^sms/send$',
-        'stucampus.master.views.manage.index.send_sms', name='sms')
+        'stucampus.master.views.manage.index.send_sms', name='sms'),
+
+    url(r'^convert$',
+        'stucampus.master.views.manage.index.convert', name='convert')
 
 )
