@@ -53,3 +53,10 @@ def nospaces(parser, token):
     nodelist = parser.parse(('endnospaces',))
     parser.delete_first_token()
     return StripspacesNode(nodelist, replacement='')
+
+@register.simple_tag(takes_context=True)
+def url_replace(context, field, value):
+    print context
+    dict_ = context['request'].GET.copy()
+    dict_[field] = value
+    return '?'+dict_.urlencode()
