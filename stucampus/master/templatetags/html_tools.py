@@ -57,6 +57,7 @@ def nospaces(parser, token):
     return StripspacesNode(nodelist, replacement='')
 
 
+
 @register.simple_tag(takes_context=True)
 def autoSwapCDN( context, filepath ):
     try:
@@ -72,3 +73,10 @@ def autoSwapCDN( context, filepath ):
     except ValueError:
         raise template.TemplateSyntaxError("%r tag requires exactly one argument" % filepath)
     return fullpath
+
+@register.simple_tag(takes_context=True)
+def url_replace(context, field, value):
+    dict_ = context['request'].GET.copy()
+    dict_[field] = value
+    return '?'+dict_.urlencode()
+
