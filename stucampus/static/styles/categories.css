@@ -39,7 +39,7 @@
 	font-size: 18px;
 	padding: 3px 0;
 	margin-bottom: 3px;
-	color: #851613;
+	color: #48857f;
 	text-align: left;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .content .pagingbar a:hover{
-	background: #851613
+	background: #175650
 }
 
 .content .pagingbar span{
