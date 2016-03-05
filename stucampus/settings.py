@@ -4,6 +4,13 @@ import os
 # Repository directory.
 ROOT = os.path.dirname(os.path.dirname(__file__))
 
+# use config,DEBUG and DATABASES in it
+
+try:
+    from stucampus.config.production import *
+except ImportError:
+    from stucampus.config.development import *
+
 # path bases things off of ROOT
 def path(*a):
     return os.path.abspath(os.path.join(ROOT, *a))
@@ -52,25 +59,35 @@ STATICFILES_FINDERS = (
    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.request',
-)
+
+
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [path('stucampus', 'templates'),],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+            'debug': DEBUG,
+        },
+    },
+]
+
 
 
 ROOT_URLCONF = 'stucampus.urls'
 
 WSGI_APPLICATION = 'stucampus.wsgi.application'
 
-TEMPLATE_DIRS = (
-    path('stucampus', 'templates'),
-)
 
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
+
+
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -156,7 +173,4 @@ LOGGING = {
 
 
 
-try:
-    from stucampus.config.production import *
-except ImportError:
-    from stucampus.config.development import *
+
