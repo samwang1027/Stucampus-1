@@ -1,3 +1,4 @@
+#coding:utf-8
 import os
 
 
@@ -171,6 +172,8 @@ LOGGING = {
         },
     }
 }
+
+DUOSHUO_SHORT_NAME="szustu" #多说二级域名
 
 
 
