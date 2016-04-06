@@ -1,4 +1,4 @@
-@media screen and (max-width: 1366px){
+@media screen and (max-width: 960px){
     html{
         font-size: 30px;
     }
@@ -169,12 +169,70 @@ body{
 }
 .artical-text img{
     max-width: 90%;
+    height: auto !important;
 }
 .artical-foot{
     margin-top: 1.5rem;
     position: relative;
     overflow: hidden;
-    height: 9.133333rem;
+    height: 15.577rem;
+}
+.sharebox{
+    position: absolute;
+    top: 4.066667rem;
+    height: 4.8rem;
+    width: 100%;
+    font-size: 0.6rem;
+}
+.sharebox span{
+    position: absolute;
+    left: 3.2rem;
+    line-height: 4.8rem;
+}
+.sharebox a{
+    position: absolute;
+    left: 9.6rem;
+    top: 1.26667rem;
+    width: 1.06667rem;
+    text-decoration: none;
+    color: rgba(0,0,0,0.54);
+}
+.sharebox a span{
+    position: absolute;
+    left: -0.1rem;
+    top: 1.6667rem;
+    width: 1.2rem;
+    text-decoration: none;
+    color: rgba(0,0,0,0.54);
+    line-height: 0.8rem;
+    white-space: nowrap;
+}
+.sharebox a:nth-of-type(4) span{
+    left: 0.1rem;
+    width: auto;
+}
+.sharebox a:nth-of-type(5) span{
+    left: -0.4rem;
+    width: auto;
+}
+.sharebox a:nth-of-type(3){
+    position: absolute;
+    left: 14.66667rem;
+    top: 1.26667rem;
+}
+.sharebox a:nth-of-type(4){
+    position: absolute;
+    left: 19.733334rem;
+    top: 1.26667rem;
+}
+.sharebox a:nth-of-type(5){
+    position: absolute;
+    left: 24.8rem;
+    top: 1.26667rem;
+}
+.sharebox a img{
+    width: 1.0667rem;
+    height: 1.0667rem;
 }
 .artical-foot hr{
     position: absolute;
@@ -182,6 +240,15 @@ body{
     height: 1px;
     width: 100%;
     background-color: rgba(0,0,0,0.08);
+    z-index: 101;
+}
+.artical-foot hr:nth-last-child(2){
+    bottom: 6.666667rem;
+    top: auto;
+    height: 1px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.08);
+    z-index: 101;
 }
 .like-content{
     position: absolute;
@@ -285,7 +352,7 @@ body{
 .comment-main{
     margin: 1.066667rem auto;
     width: 28.8rem;
-    padding: 0.6rem 1.6rem;
+    padding:0 1.6rem;
     background-color: #FDFDFD;
     overflow: hidden;
     border-radius: 2px;

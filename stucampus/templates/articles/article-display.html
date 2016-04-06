@@ -6,9 +6,11 @@
 
 {% block htmlhead %}
     {% load html_tools %}
-    <link href="/static/styles/articles/artical.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />
-    <link href="/static/styles/articles/artical4pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
+    <link href="/static/styles/articles/article-phone.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />
+    <link href="/static/styles/articles/article-pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
     {{ 'artical.js' | as_js }}
+    {{ 'plugins/moment.js' | as_js }}
+    {{ 'articles/duoshuo.css' | as_css }}
 {% endblock %}
 
 {% block content %}
@@ -42,44 +44,86 @@
             <div class="like-content">
                 <!--<img class="left" src="/static/images/like.png"><p  class="left">99999</p>-->
                 <p class="artical-time">{{ article.create_date | date:"Y-n-d"}}</p>
-                <img class="comment_img" src="/static/images/index/comment.png"><p class="comment_p">99999</p>
+                <img class="comment_img" src="/static/images/index/comment.png"><p class="comment_p">{{ article.comments }}</p>
                 <img src="/static/images/index/eye.png" class="eye_img"><p class="eye_p">{{ article.click_count }}</p>
                 </div>
                 <hr />
-                <a class="foot share" href="javascript:void(0)"><img id="share_normal" src="/static/images/articles/share_48.png"><img id="share_active" src="/static/images/articles/share_48.png"><p>分享</p></a>
+                <div class="sharebox">
+                    <span>分享到：</span>
+                    <a class="backarticalfoot" href="javascript:void(0)"><span>返回</span></a>
+                    <a id="wechat" href="http://service.weibo.com/share/share.php?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&pic=http://stu.szu.edu.cn{{ article.cover }}" target="_blank"><img src="/static/images/index/wechat.png"><span>微信</span></a>
+                    <a id="weibo" href="http://service.weibo.com/share/share.php?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&pic=http://stu.szu.edu.cn{{ article.cover }}" target="_blank"><img src="/static/images/index/sina.png"><span>微博</span></a>
+                    <a id="QQ" href="http://connect.qq.com/widget/shareqq/index.html?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&desc=&summary=&site=" target="_blank"><img src="/static/images/index/QQ.png"><span>QQ</span></a>
+                    <a id="twitter" href="http://s.share.baidu.com/?click=1&url=http://stu.szu.cn{% url 'articles:display' article.pk %}&uid=0&to=twi&type=text&pic=&title={{ article.title }}-深圳大学学子天地&key=&desc=&comment=&relateUid=&searchPic=0&sign=on&l=1afglci3o1afglcj3k1afgokghr&linkid=imm21dvnzhc&firstime=" target="_blank"><img src="/static/images/index/twitter.png"><span>Twitter</span></a>
+                </div>
+                <a class="foot share" href="javascript:showsharetools()"><img id="share_normal" src="/static/images/articles/share_48.png"><img id="share_active" src="/static/images/articles/share_48.png"><p>分享</p></a>
                 <a class="foot comment" href="javascript:void(0)"><img id="comment_normal" src="/static/images/articles/comment_48.png"><img id="comment_active" src="/static/images/articles/comment_48.png"><p>评论</p></a>
+                <hr />
+                <div class="add-comment">
+                    <a class="backarticalfoot" href="javascript:void(0)"></a>
+                    <textarea class="addcomment"></textarea> 
+                    <a class="submit" href="javascript:showIdentityBox()"></a>
+                </div>
             </div>
         </div>
-        <div>
-            
-        
-        
+        <!--duoshuodenglu-->
+        <div class="background"></div>
+        <div class="ds-dialog-inner" style="display:none;">
+            <div class="shadow"></div>
+            <b>作为游客留言</b>
+            <input name="author_name" type="text" placeholder="姓名">
+            <input name="author_email" type="email" placeholder="邮箱">
+            <a href="javascript:sendMessageToDuoshuo()">提交</a>
         </div>
+        <script>
+            function sendMessageToDuoshuo(){
+                var author_name = $("input[name='author_name']").val();
+                var author_email = $("input[name='author_email']").val();
+                var message = $(".addcomment").val();
+                var posturl="http://gearliu.duoshuo.com/api/posts/create.json";
+                if(author_name!="" && author_email!=""){
+                    var Data="short_name=szustu&thread_key=article-comments-{{ article.id }}&message="+message+"&nonce=5700b85f9282b&author_name="+author_name+"&author_email="+author_email+"&v=16.3.18";
+                        console.log(Data);
+                }
+                else{
+                    StuCampus.alert("请补全您的姓名和邮箱.",5000);
+                }
+                $.post(posturl,Data,function(result,status){
+                    if(status=='success'){
+                        d = result;
+                        var defaulticonurl="http://static.duoshuo.com/images/noavatar_default.png";
+                        if(result['response']["status"]=="approved"){
+                            userurl = result["response"]["author"]["url"]==null?'javascript:void(0)':result["response"]["author"]["url"];
+                            useravatarurl = result["response"]["author"]["avatar_url"]==null?defaulticonurl:result["response"]["author"]["avatar_url"];
+                            $(".ds-thread").prepend('<div class="comments"><a class="user_info" href='+userurl+'><img class="avatar" src='+useravatarurl+'><p class="name" >'+result["response"]["author"]["name"]+'</p><p class="c_createtime">'+result["response"]["created_at"]+'</p><a class="reply" href="javascript:void(0)"><img src="/static/images/index/reply_32.png"><p>回复</p></a><a class="like" href="javascript:void(0)"><img src="/static/images/index/unfavorite_32.png"><p>'+result['response']['likes']+'</p></a></a><span class="message">'+result["response"]["message"]+'</span></div>');
+                            $(".add-comment").removeClass("appear");
+                            $(".addcomment").val("");
+                            $(".add-comment").addClass("scale1");
+                        }
+                    }
+                    else{
+                        $(".ds-dialog-inner").show();
+                    }
+                });
+            };
+        </script>
         <div class="comment-main">
         <!-- Duoshuo Comment BEGIN -->
-            <div class="ds-thread" data-thread-key="article-comments-{{ article.id }}" data-title="{{ article.title }}"></div>
-            <script type="text/javascript">
-                var duoshuoQuery = {short_name:"szustu"};
-                (function() {
-                    var ds = document.createElement('script');
-                    ds.type = 'text/javascript';ds.async = true;
-                    ds.src = 'http://static.duoshuo.com/embed.js';
-                    ds.charset = 'UTF-8';
-                    (document.getElementsByTagName('head')[0] 
-                    || document.getElementsByTagName('body')[0]).appendChild(ds);
-                })();
-            </script>
-            <script type="text/javascript">
-                likes = $(".ds-post-likes");
-                for(i=0;i<likes.length;i++){
-                    var reg=/[\u4E00-\u9FA5]/g;
-                    var result=title.replace(reg,'');
-                    likenum = parseInt(likes[i].innerText.replace(reg,''));
-                    likes[i].innerText = likenum;
-                }
-            </script>
+            <div class="ds-thread" data-thread-key="article-comments-{{ article.id }}" data-title="{{ article.title }}">
+                {% for comment in comments %}
+                <div class="comments">
+                    <a class="user_info" href="{{ comment.author.url }}">
+                        <img class="avatar" src="{{ comment.author.avatar_url }}" alt="{{ comment.author.name }}">
+                        <p class="name" >{{ comment.author.name }}</p>
+                        <p class="c_createtime">{{ comment.created_at }}</p>
+                        <a class="reply" href="javascript:void(0)"><img src="/static/images/index/reply_32.png"><p>回复</p></a>
+                        <a class="like" href="javascript:void(0)"><img src="/static/images/index/unfavorite_32.png"><p>{{ comment.likes }}</p></a>
+                    </a>
+                    <span class="message">{{ comment.message }}</span>
+                </div>
+                {% endfor %}
+            </div>
         <!-- Duoshuo Comment END -->
         </div>
 <!--end of central article-->
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 {% endblock %}

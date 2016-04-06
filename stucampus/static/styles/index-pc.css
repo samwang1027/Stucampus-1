@@ -1,8 +1,8 @@
 .banner{
 	position: relative;
-    margin-top: 1.733333rem;
     width: 45.533333rem;
 	height: 11.533333rem;
+    font-size: 30px;
 	overflow: hidden;
 }
 .blur{
@@ -40,6 +40,7 @@
     position: relative;
     width: 227.7666667rem;
     height: 11.533333rem;
+    font-size: inherit;
 }
 .b-container a{
     position: relative;
@@ -48,6 +49,7 @@
 	height: 11.533333rem;
 	overflow: hidden;
 	text-decoration: none;
+    font-size: inherit;
 	float: left;
     transition: left 0.5s ease-out;
     -moz-transition: left 0.5s ease-out; /* Firefox 4 */
@@ -100,7 +102,7 @@
 }
 .main-content{
     position: relative;
-    margin:0 6.433333rem;
+    margin:0 auto;
     width: 32.666667rem;
     overflow: hidden;
 }

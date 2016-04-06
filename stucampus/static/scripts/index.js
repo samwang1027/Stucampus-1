@@ -1,6 +1,19 @@
 var fontsize;
 var now = 0;
 var logoclicktime = 0;
+$(window).load(function(){
+    bannerall = $(".b-container a");
+    for(var i=0;i<bannerall.length;i++){
+        $(".selector").append('<a class="round" href="javascript:void(0)"></a>');
+    }
+    $(".selector >a:first-child").addClass("active");
+    $(".banner_title").each(function(){
+        var w = document.body.clientWidth;
+        if($(this).text().length>10 && w<=767){
+            $(this).css("top","1.566667rem");
+        }
+    });
+});
 window.onload = function(){
     $(".sidebar").hide();
     setTimeout(function(){
@@ -8,15 +21,6 @@ window.onload = function(){
     },500);
     var w = document.body.clientWidth;
     resized(w);
-    bannerall = $(".b-container a");
-    for(var i=0;i<bannerall.length;i++){
-        if(i==0){
-            $(".selector").append('<a class="round active" href="javascript:void(0)"></a>');
-        }
-        else{
-            $(".selector").append('<a class="round" href="javascript:void(0)"></a>');
-        }
-    }
     bannerwidth = parseInt($(".b-container a").css("width"))/fontsize;
     rounds = $(".round");
     giveRoundsAndBannerNum();
@@ -38,26 +42,14 @@ function giveRoundsAndBannerNum(){
         rounds.eq(i).attr("id",i);
     }
 }
-function resized(windowswidth){
-    if(windowswidth<=767){
-        fontsize= windowswidth/750*30 ;
-    }
-    else if(windowswidth>=768&&windowswidth<=1366){
-        fontsize = windowswidth/1366*30;
-    } 
-    else if(windowswidth>1366){
-        fontsize = 30;
-    }
-    $("html").css("font-size",fontsize+"px");
-}
 function bannertouchstart(event){
     touch = event.originalEvent.targetTouches[0];
     firstPos = {
         x : Number(touch.pageX),
         y : Number(touch.pageY)
     };
-    event.preventDefault();
-}
+    console.log(firstPos['x']+" "+firstPos['y']);
+};
 function bannertouchend(event){
     touch = event.originalEvent.changedTouches[0];
     lastPos = {
@@ -82,12 +74,11 @@ function bannertouchend(event){
             bannerselect(now+1);
         }
     }
-}
+};
 function bind(){
-    $(".b-container a")
+    $(".b-container > a")
        .bind('touchstart', bannertouchstart)
        .bind('touchend',bannertouchend);
-    //for(var i=bannerall.length-1;i>=0;i--){
     for(var i=0;i<bannerall.length;i++){
         rounds.eq(i).click(function(){ bannerselect(this.id)});
     }
@@ -115,27 +106,6 @@ function bannerselect(bannerid){
     rounds.eq(now).removeClass("active");
     now = parseInt(bannerid);
     rounds.eq(now).addClass("active");
-    return false;
-}
-
-function sidebaropen(){
-    $(".fixed-logo").css("transform","scale(0)");
-    $(".sidebar").show();
-    setTimeout(function(){
-        $(".sidebar").addClass("sidebarout");
-        $(".call-back").show();
-    },100);
-    return false;
-}
-function sidebarclose(){
-    setTimeout(function(){
-        $(".fixed-logo").css("transform","scale(1)");
-    },500);
-    $(".sidebar").removeClass("sidebarout");
-    $(".call-back").hide();
-    setTimeout(function(){
-        $(".sidebar").hide();
-    },500);
     return false;
 }
 

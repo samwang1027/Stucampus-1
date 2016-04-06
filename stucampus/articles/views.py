@@ -175,8 +175,10 @@ def article_display(request, id=None):
     article = get_object_or_404(Article, pk=id, publish=True, deleted=False)
     article.click_count += 1
     article.save()
-    comments=DuoShuo.getListPosts(257)
-    print comments
+    comments=DuoShuo.getListPosts(article.id)
+    commentAndLikeNum = DuoShuo.getCommentsAndLikesNum(article.id)
+    article.comments = commentAndLikeNum['comments']
+    article.likes = commentAndLikeNum['likes']
     return render(request, 'articles/article-display.html',
             {'article': article,'comments':comments})
 

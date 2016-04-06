@@ -74,6 +74,7 @@ class DuoShuo(object):
         response_json=json.loads(response.read()) 
         return response_json
 
+
     @classmethod
     def getListPosts(cls,id,page=1,limit=8,order='desc'):
         '''
@@ -90,11 +91,30 @@ class DuoShuo(object):
             comment={}
             parent_posts_value= parent_posts[parent_post]
             comment["author"]=parent_posts_value["author"]
+            '''
+                因为在返回数据中有None
+                而如果直接传输None的话
+                会导致读取不到头像
+                并且拖慢加载速度
+                因此加了以下几行
+                Corrected by GearLiu<gearliu155@gmail.com>
+            '''
+            if comment["author"]["url"] is None:
+                comment["author"]["url"]="javascript:void(0)"   #无链接网址则不跳转
+                comment["author"]["avatar_url"]="http://static.duoshuo.com/images/noavatar_default.png"  #无头像时用多说默认头像
+
             comment["message"]=parent_posts_value["message"]
             comment["created_at"]=parent_posts_value["created_at"]
             comment["likes"]=parent_posts_value["likes"]
             comments.append(comment)
-        sorted(comments, cmp=lambda x,y:cmp(x["likes"],y["likes"]))
+        '''
+            sorted排序函数会返回经排序过后的列表
+            所以要给comments赋值后才算是真正排序了  #当然直接return sorted(xxx)也是可以的
+            评论应该要从点赞数多的先排起
+            要加参数reverse=True 反转
+        '''
+        # sorted(comments, cmp=lambda x,y:cmp(x["likes"],y["likes"]))
+        comments = sorted(comments, cmp=lambda x,y:cmp(x["likes"],y["likes"]),reverse=True)
         return comments
 
     @classmethod
