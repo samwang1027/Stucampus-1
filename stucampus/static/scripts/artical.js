@@ -36,10 +36,12 @@ $(function(){
     navcome(nownavid);
     $(".fixed-logo").bind('click',function(){showtools();});
     $(".comment").bind('click',function(){showcommenttools();});
+    $("#discuss").bind('click',function(){showcommenttools();showtools();});
     $(".share").bind('click',function(){showsharetools();});
+    $("#share").bind('click',function(){showsharetools();});
     $(".backarticalfoot").bind('click',function(){$(".add-comment").removeClass("appear");$(".sharebox").removeClass("appear");
         $(".fixed-logo").addClass('scale1');});
-    $(".addcomment").focus(function(){$(".fixed-logo").removeClass('scale1');});
+    $(".addcomment").focus(function(){setTimeout(function(){$(".fixed-logo").removeClass('scale1');},500);});
     $(".addcomment").blur(function(){$(".fixed-logo").addClass('scale1');});
 });
 function showtools(){
@@ -74,6 +76,9 @@ function showsharetools(){
     $(".sharebox").show();
     setTimeout(function(){
         $(".sharebox").addClass("appear");
+        $("body,html").animate({ 
+            scrollTop:$(".sharebox").offset().top //让body的scrollTop等于pos的top，就实现了滚动 
+        },0); 
     },100);
 }
 function showIdentityBox(){
