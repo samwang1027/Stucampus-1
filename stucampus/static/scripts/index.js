@@ -21,7 +21,9 @@ window.onload = function(){
     },500);
     var w = document.body.clientWidth;
     resized(w);
-    bannerwidth = parseInt($(".b-container a").css("width"))/fontsize;
+    $(".banner").width($(window).width()/fontsize+"rem");
+    $(".b-container > a").width($(window).width()+"px");
+    bannerwidth = $(".b-container a").width()/fontsize;
     rounds = $(".round");
     giveRoundsAndBannerNum();
     bannerRun();
@@ -30,8 +32,16 @@ window.onload = function(){
         eval("theOldFun="+window.onresize.toString()); 
         window.onresize=function(){
             theOldFun();
-            bannerwidth = parseInt($(".b-container a").css("width"))/fontsize;
+            $(".banner").width($(window).width()/fontsize+"rem");
+            $(".b-container > a").width($(window).width()+"px");
+            bannerwidth = parseInt($(".b-container > a").css("width"))/fontsize;
             bannerselect(now);
+            $(".banner_title").each(function(){
+                var w = document.body.clientWidth;
+                if($(this).text().length>10 && w<=767){
+                    $(this).css("top","1.566667rem");
+                }
+            });
         }; 
     }
     $(".fixed-logo").bind('click',function(){hiddenthings();});
@@ -48,7 +58,6 @@ function bannertouchstart(event){
         x : Number(touch.pageX),
         y : Number(touch.pageY)
     };
-    console.log(firstPos['x']+" "+firstPos['y']);
 };
 function bannertouchend(event){
     touch = event.originalEvent.changedTouches[0];
@@ -101,6 +110,7 @@ function bannerRun(){
     },3);
 }
 function bannerselect(bannerid){
+    var bannerwidth = $(".b-container a").width()/fontsize;
     bannerall.css("left",-bannerid*bannerwidth+"rem");
     time = 0;
     rounds.eq(now).removeClass("active");

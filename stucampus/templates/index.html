@@ -12,7 +12,6 @@
     {% load html_tools %}
     {{ 'plugins/basic-jquery-slider.js' | as_js }}
     {{ 'index.js' | as_js }}
-    {{ 'basic-jquery-slider.css' | as_css }}
     <link href="/static/styles/index-phone.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />  
     <link href="/static/styles/index-pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
 {% endblock %}
@@ -30,10 +29,12 @@
             <a  href="{% url 'articles:display' article.pk %}" style="left: 0rem;" >
                 <div class="blur">
                 </div>
-                <p class="banner_title">{{ article.title | truncatechars:19  }}</p>
-                <p class="banner_describe">{{ article.summary }}</p>
+                <div class="infomation">
+                    <p class="banner_title">{{ article.title | truncatechars:19  }}</p>
+                    <p class="banner_describe">{{ article.summary }}</p>
+                    <p class="banner_category">{{ article.category }}</p>
+                </div>
                 <img src="{{ article.cover.url | scale_qiniu_img:request}}" alt="{{ article.title | truncatechars:19  }}" />
-                <p class="banner_category">{{ article.category }}</p>
             </a>
         {% endfor %}
         </div>
@@ -54,16 +55,16 @@
                     <hr />
                     <div class="like-content">
                         <!--<img class="left" src="images/like.png"><p  class="left">99999</p>-->
-                        <img src="/static/images/index/comment.png"  class="comment_img"><p class="comment_p">{{ article.comments }}</span></p>
-                        <img src="/static/images/index/eye.png" class="eye_img"><p class="eye_p">{{ article.click_count }}</p>
+                        <div class="acomments"><span class="comment_img"></span><p class="comment_p">{{ article.comments }}</span></p></div>
+                        <div class="aeyes"><span class="eye_img"></span><p class="eye_p">{{ article.click_count }}</p></div>
                     </div>
                 </a>
             </div>
         {% endfor %}
         {% if important_articles.has_next %}
-        <!-- <div class="page_number">{{ important_articles.number }}</div> -->
+            <div class="page_number">{{ important_articles.number }}</div>
         {% else %}
-        <div class="page_number">没有更多文章了</div>
+            <div class="page_number">没有更多文章了</div>
         {% endif %}
         </div><!--end of cont_articles-->
 
@@ -131,6 +132,31 @@
             </div>
         </div>
     </div><!--end of sidebar-->
-</div><!--end of central-->
+    <script type="text/javascript">
+        $(window).scroll(function(){
+            var scrollPos = $(document).scrollTop(); //滚动条距离顶部的高度
+            var windowHeight = $(window).height(); //窗口的高度
+            var dbHiht = $(document).height(); //整个页面文件的高度
+            if(dbHiht - windowHeight <= scrollPos){
+                if($(".page_number").last().text()=="没有更多文章了"){
+                    StuCampus.alert("没有更多文章了",1000);
+                }
+                else{
+                    getNextTimes = parseInt($(".page_number").last().text()) + 1;
+                    setTimeout(function(){
+                        $.ajax({
+                            type: "GET",
+                            url: "/?page="+getNextTimes,
+                            dataType: "html",
+                            success: function(data){
+                                $(".artical-content").append(data);
+                            }
+                        });
+                    },500);
+                }
+            }
+        });
+    </script>
+<!--end of central-->
 
 {% endblock %}

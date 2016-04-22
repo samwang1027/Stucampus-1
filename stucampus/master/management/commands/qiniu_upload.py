@@ -1,5 +1,6 @@
 #-*- coding: utf-8
 from django.core.management.base import BaseCommand, CommandError
+from django.conf import settings
 
 from stucampus.articles.models import Article
 
@@ -16,7 +17,7 @@ class Command(BaseCommand):
 	def handle(self, *args, **options):
 		articles=Article.objects.all()
 		for article in articles:
-			upload_img(unicode(article.cover))
+			upload_img(str(article.cover))
 			article.save()
 		print "completed upload to qiniu"
 
