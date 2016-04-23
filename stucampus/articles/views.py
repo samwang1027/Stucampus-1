@@ -185,9 +185,7 @@ def article_display(request, id=None):
     article.click_count += 1
     article.save()
     comments=DuoShuo.getListPosts(article.id)
-    commentAndLikeNum = DuoShuo.getCommentsAndLikesNum(article.id)
-    article.comments = commentAndLikeNum['comments']
-    article.likes = commentAndLikeNum['likes']
+    article = DuoShuo.appendNumToArticle(article)
     return render(request, 'articles/article-display.html',
             {'article': article,'comments':comments})
 
