@@ -121,7 +121,7 @@ INSTALLED_APPS = (
     'stucampus.spider',
     'stucampus.szuspeech',
     'stucampus.minivideo',
-
+    'stucampus.gobye',
     #'stucampus.dreamer',
     'stucampus.FreeTimeCount',
     # Uncomment the next line to enable the admin:

@@ -20,6 +20,8 @@ from stucampus.spider import urls as spider_urls
 from stucampus.FreeTimeCount import urls as FreeTimeCount_urls
 from stucampus.master.views.front import index,about_us
 
+# -- new --
+from stucampus.gobye import urls as gobye_urls
 
 
 admin.autodiscover()
@@ -46,6 +48,11 @@ urlpatterns = [
                                namespace='szuspeech')),
     url(r'^minivideo/', include(minivideo_urls,
                                namespace='minivideo')),
+# -- new --
+    url(r'gobye/',include(gobye_urls,
+                         namespace='gobye')),
+
+# -- end new --
     url(r'^admin/', include(admin.site.urls)),
     url(r'^spider/', include(spider_urls, namespace='spider')),
     #url(r'^dreamer/', include('stucampus.dreamer.urls', namespace='dreamer')),
