@@ -6,6 +6,25 @@ var $all;
 function reset() {
     $("body").html($all);
 }
+
+
+// 显示 or 隐藏 标记功能
+$(function () {
+    $("tr > td:last-child").hide();
+    $("tr th:last-child").hide();
+});
+function modify(e) {
+    if ($(e).html()=="关闭修改") {
+        $(e).html("开启修改");
+    }
+    else {
+        $(e).html("关闭修改");
+    }
+    $("tr > td:last-child").fadeToggle(500);
+    $("tr th:last-child").fadeToggle(500);
+}
+
+
 // 移动一门课程
 function move_one(e) {
     if ($(e).html() === "标记挂科") {
@@ -31,6 +50,7 @@ function move_one(e) {
         move_back($tr);
     }
 }
+
 // 批量撤销
 function move_group(e) {
     var mode = $(e).attr("value");
@@ -58,6 +78,7 @@ function move_group(e) {
         })
     }
 }
+
 // 使一门课程回到原位置
 function move_back($tr) {
     var mode = $tr.find("td:eq(4)").html();
@@ -86,6 +107,7 @@ function move_back($tr) {
         $tr.remove();
     }
 }
+
 // 计算学分总分
 function calculate() {
 

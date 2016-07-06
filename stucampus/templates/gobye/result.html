@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <title>Title</title>
-    <link rel="stylesheet" href="css/result.css">
-    <script src="javascript/jquery.min.js"></script>
-    <script src="javascript/result.js"></script>
+    <link rel="stylesheet" href="../../static/styles/gobye/result.css">
+    <script src="../../static/scripts/gobye/jquery.min.js"></script>
+    <script src="../../static/scripts/gobye/result.js"></script>
 </head>
 <body>
 <div class="dialog">
     <h1>你还差 50 个 学分</h1>
     <br>
-    <p><a href="javascript:void(0)" onclick="reset()">重置</a></p>
+    <p>
+        <button onclick="reset()">重置</button>
+        <button href="javascript:void(0)" onclick="modify(this)">开启修改</button>
+    </p>
 </div>
 <div class="pretty-table public-must">
 
